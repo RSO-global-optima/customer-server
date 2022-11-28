@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>team.globaloptima</groupId>
-    <artifactId>project-fake-glovo</artifactId>
+    <artifactId>customer-server</artifactId>
     <version>1.0-SNAPSHOT</version>
 
 
