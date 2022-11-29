@@ -7,6 +7,8 @@
 ### Requirements
  - Java openjdk-19.0.1
  - Maven 3.8.6
+ - Running postgres server on localhost  
+`docker run -d --name pg-jpa -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=customers -p 5432:5432 postgres:15.1`
 
 Check the correct versions with `mvn --version`
 
