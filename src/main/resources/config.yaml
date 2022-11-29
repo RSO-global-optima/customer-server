@@ -1,8 +1,18 @@
 kumuluzee:
-  name: project-fake-glovo
+  name: customer-server
   env:
     name: dev
   version: 1.0.0
+  datasources:
+    - jndi-name: jdbc/CustomersDS
+      connection-url: jdbc:postgresql://localhost:5432/customers
+      username: postgres
+      password: postgres
+      pool:
+        max-size: 2
+  persistence-units:
+    - name: "team-globaloptima-customer"
+      continue-on-error: false
   server:
     base-url: http://localhost:8080
     http:
