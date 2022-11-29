@@ -15,5 +15,6 @@ Check the correct versions with `mvn --version`
 ### How to run
  - build the project `mvn clean package`  
  - run locally `java -jar target/customer-server-1.0-SNAPSHOT.jar`  
- Service can be accessed via [http://localhost:8080/v1/customers](http://localhost:8080/v1/customers)
+ - Service can be accessed via [http://localhost:8080/v1/customers](http://localhost:8080/v1/customers)
+ - openapi documentation can be viewed via [http://localhost:8080/openapi/ui](http://localhost:8080/openapi/ui)
 
