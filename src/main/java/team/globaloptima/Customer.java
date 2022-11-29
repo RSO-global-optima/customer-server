@@ -1,10 +1,27 @@
 package team.globaloptima;
 
-public class Customer {
-    private String id;
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "customer")
+@NamedQueries({
+        @NamedQuery(
+                name = "Customer.findCustomers",
+                query = "SELECT c FROM Customer c"
+        )
+})
+public class Customer implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name = "firstName")
     private String firstName;
+    @Column(name = "lastName")
     private String lastName;
+    @Column(name = "address")
     private String address;
+    @Column(name = "phoneNumber")
     private String phoneNumber;
 
     public String getPhoneNumber() {
@@ -23,11 +40,11 @@ public class Customer {
         this.address = address;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -1,5 +1,6 @@
 package team.globaloptima;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -11,16 +12,19 @@ import java.util.List;
 @Path("customers")
 public class CustomerResource {
 
+    @Inject
+    CustomerService customerBean;
+
     @GET
     public Response getAllCustomers() {
-        List<Customer> customers = Database.getCustomers();
+        List<Customer> customers = customerBean.getCustomers();
         return Response.ok(customers).build();
     }
 
     @GET
     @Path("{customerId}")
-    public Response getCustomer(@PathParam("customerId") String customerId) {
-        Customer customer = Database.getCustomer(customerId);
+    public Response getCustomer(@PathParam("customerId") Integer customerId) {
+        Customer customer = customerBean.getCustomer(customerId);
         return customer != null
                 ? Response.ok(customer).build()
                 : Response.ok(Response.Status.NOT_FOUND).build();
@@ -28,14 +32,14 @@ public class CustomerResource {
 
     @POST
     public Response addNewCustomer(Customer customer) {
-        Database.addCustomer(customer);
+        customerBean.saveCustomer(customer);
         return Response.noContent().build();
     }
 
     @DELETE
     @Path("{customerId}")
-    public Response deleteCustomer(@PathParam("customerId") String customerId) {
-        Database.deleteCustomer(customerId);
+    public Response deleteCustomer(@PathParam("customerId") Integer customerId) {
+        customerBean.deleteCustomer(customerId);
         return Response.noContent().build();
     }
 }
