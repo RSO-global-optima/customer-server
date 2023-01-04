@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: globaloptima
+      app: globaloptima-customer
   template:
     metadata:
       labels:
-        app: globaloptima
+        app: globaloptima-customer
     spec:
       containers:
         - image: mzakel/globaloptima-customer:2022-11-30-13-40-42
@@ -35,12 +35,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: globaloptima
+  name: globaloptima-customer
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - port: 8080
       protocol: TCP
       targetPort: server
   selector:
-    app: globaloptima
+    app: globaloptima-customer
