@@ -32,6 +32,6 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v3
         with:
-          file: ./Dockerfile_with_maven
+          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/globaloptima-customer:${{ steps.current-time.outputs.formattedTime }}
