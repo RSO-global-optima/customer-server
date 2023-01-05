@@ -1,45 +1,46 @@
 package team.globaloptima;
 
 
-import org.eclipse.microprofile.graphql.GraphQLApi;
-import org.eclipse.microprofile.graphql.Mutation;
-import org.eclipse.microprofile.graphql.Name;
-import org.eclipse.microprofile.graphql.Query;
-
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
-/**
- * @author Benjamin Kastelic
- * @since 2.3.0
- */
-@RequestScoped
-@GraphQLApi
+
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+@Path("customers")
 public class CustomerResource {
 
     @Inject
-    private CustomerService customerBean;
+    CustomerService customerBean;
 
-    @Query
-    public List<Customer> getAllCustomers() {
-        return customerBean.getCustomers();
+    @GET
+    public Response getAllCustomers() {
+        List<Customer> customers = customerBean.getCustomers();
+        return Response.ok(customers).build();
     }
 
-    @Query
-    public Customer getCustomer(@Name("customerId") Integer customerId) {
-        return customerBean.getCustomer(customerId);
+    @GET
+    @Path("{customerId}")
+    public Response getCustomer(@PathParam("customerId") Integer customerId) {
+        Customer customer = customerBean.getCustomer(customerId);
+        return customer != null
+                ? Response.ok(customer).build()
+                : Response.ok(Response.Status.NOT_FOUND).build();
     }
 
-    @Mutation
-    public Customer addNewCustomer(@Name("customer") Customer customer) {
+    @POST
+    public Response addNewCustomer(Customer customer) {
         customerBean.saveCustomer(customer);
-        return customer;
+        return Response.noContent().build();
     }
 
-    @Mutation
-    public  Boolean deleteCustomer(@Name("customerId") Integer customerId) {
-        return customerBean.deleteCustomer(customerId);
+    @DELETE
+    @Path("{customerId}")
+    public Response deleteCustomer(@PathParam("customerId") Integer customerId) {
+        customerBean.deleteCustomer(customerId);
+        return Response.noContent().build();
     }
 }
-
