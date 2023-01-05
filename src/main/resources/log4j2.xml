@@ -11,7 +11,7 @@
     </Appenders>
     <Loggers>
         <!-- Default logger -->
-        <Logger name="team.globaloptima.CustomerResource" level="trace" additivity="false">
+        <Logger name="team.globaloptima.grapql.CustomerQuerries" level="trace" additivity="false">
             <AppenderRef ref="logstash"/>
         </Logger>
         <Root level="all">
