@@ -33,11 +33,16 @@ public class CustomerService {
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
-    public void deleteCustomer(Integer customerId) {
+    public Boolean deleteCustomer(Integer customerId) {
         Customer customer = em.find(Customer.class, customerId);
         if (customer != null) {
             em.remove(customer);
         }
+        if (customer != null) {
+            em.remove(customer);
+            return true;
+        }
+        return false;
     }
 
 }
