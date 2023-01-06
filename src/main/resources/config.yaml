@@ -32,3 +32,6 @@ kumuluzee:
     base-url: http://localhost:8080
     http:
       port: 8080
+
+rest-config:
+  maintenance: false
